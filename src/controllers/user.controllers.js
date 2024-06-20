@@ -54,6 +54,7 @@ const login = catchError(async (req, res) => {
     const isValid = bcrypt.compareSync(password, user.password)
     if (!isValid) return res.status(401).json({ error: 'Invalid credentials' })
     delete user.dataValues.password
+//Para contraseñas incriptadas seiempre debemos generar un token con la libreria: JWT
     const token = jwt.sign(
         { user },
         process.env.TOKEN_SECRET,
